@@ -1,0 +1,20 @@
+build: ./compile
+
+usage: ./songsearch <keyword> [<limit>]
+
+Notes:
+./compile uses -O3 for performance
+
+When first run, the program will generate a hash table for all keywords that aren't on blacklist.txt.
+This will take a fair amount of time (between 8 and 10 minutes on my home machine, ~20 on meteor).
+The output file ends up being about 40MB for the 200MB song database.  There is no compression used on the file (only binary optimization).
+
+On subsequent runs (or when a dict.dat is available), the hash table is loaded from the file, and the search is much faster (around 1 second on my home machine, 3 on meteor).
+
+The search results are saved to results.htm using the provided Web::Output command.
+
+The hash algorithm is MurmurHash2A, by Austin Appleby (public domain) -- see http://sites.google.com/site/murmurhash/
+
+File I/O is done in binary mode to increase speed and reduce dictionary file size.  Doing so instead of string stream I/O resulted in 150% increase in speed and considerable reduction in file size.
+
+

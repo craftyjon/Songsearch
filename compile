@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ -Wall -pedantic -I /g/15/2010s/hw/6 -l lyrics -L /g/15/2010s/hw/6 -o songsearch main.cpp Dict.cpp murmur.cpp Web.cpp
